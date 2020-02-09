@@ -1,0 +1,48 @@
+{% extends './base_layout.html' %}
+
+{% block content %}
+<div class="col-sm-10 m-auto p-3"">
+  <center><h2 class="d-inline">Student Home</h2></center>
+  <div class="col-sm-12">
+    <h5>{{name}}</h5>
+    <h6>{{regno}}</h6>
+    <h6>{{guide}}</h6>
+    <hr>
+  </div>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-9">
+        <h5>My Files</h5>
+        <table class="table">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Uploded At</th>
+            <th scope="col">Description</th>
+          </tr>
+          {% for file in files %}
+          <tr>
+            <td scope="row">{{forloop.counter}}</td>
+            <td><a href="/media/{{file.path}}" target="_blank">{{file.title|title}}</a></td>
+            <td>{{file.date}}</td>
+            <td>{{file.description}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="col-sm-3 bg-light p-2">
+
+        <h6>Upload File</h6>
+        <form action="/uploadfile/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+          <div class="form-group"><input type="text" class='form-control' name="title" placeholder="Title"></div>
+          <div class="form-group"><input type="text" class='form-control' name="description" placeholder="Description"></div>
+          <div class="form-group"><input type="file" name="file" /></div>
+          <input type="submit" class="btn btn-success" value="Upload">
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<p style="height: 120px;"></p>
+{% endblock %}

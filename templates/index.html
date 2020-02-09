@@ -1,0 +1,23 @@
+{% extends './base_layout.html' %}
+
+{% block content %}
+<div class="col-sm-5 m-auto p-3">
+  <h1 class="d-inline">Login</h1>
+  <form class="m-3" action="/signin/" method="POST">{% csrf_token %}
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" class="form-control" name="username" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+      <label for="pswd">Password</label>
+      <input type="password" class="form-control" name="pswd" id="pswd" placeholder="Password" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Login</button>
+    <a class="btn btn-primary text-white" href="/register/">Register</a>
+    <small class='text-danger'>{{invalidlogin}}</small>
+  </form>
+  <p style="height: 120px;"></p>
+</div>
+
+{% endblock %}

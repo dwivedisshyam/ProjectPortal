@@ -1,0 +1,97 @@
+{% extends './base_layout.html' %}
+
+{% block content %}
+<div class="col-sm-5 m-auto p-3">
+<center><h2 class="d-inline">Registration</h2></center>
+  <div class="card mt-3 tab-card">
+    <div class="card-header tab-card-header">
+      <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+        <li class="">
+          <a class="nav-link text-dark active" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Faculty</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Student</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active p-3" id="one" role="tabpanel" aria-labelledby="one-tab">
+        <form class="m-3" action="/registerFaculty/" method="POST">{% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="first_name" class="form-control" name="first_name" placeholder="First Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="last_name" class="form-control" name="last_name" placeholder="Last Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="email" class="form-control" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <select class="form-control" id="dept" name="dept">
+              <option value="" disabled selected hidden>Select Department</option>
+              {%for dept in departments%}
+              <option value="{{dept.id}}">{{dept.deptname}}</option>
+              {%endfor%}
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" id="username" class="form-control" name="username" placeholder="Username" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="pswd" id="pswd" placeholder="Password" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="cpswd" id="cpswd" placeholder="Confirm Password" required>
+          </div>
+
+          <button type="submit" class="btn btn-success">Register</button>
+          <button type="reset" class="btn btn-danger">Reset</button>
+        </form>
+      </div>
+
+
+      <div class="tab-pane fade p-3" id="two" role="tabpanel" aria-labelledby="two-tab">
+        <form class="m-3" action="/registerStudent/" method="POST">{% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="first_name" class="form-control" name="first_name" placeholder="First Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="last_name" class="form-control" name="last_name" placeholder="Last Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" class="form-control" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <select class="form-control" id="dept" name="dept">
+              <option value="" disabled selected hidden>Select Department</option>
+              {%for dept in departments%}
+              <option value="{{dept.id}}">{{dept.deptname}}</option>
+              {%endfor%}
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" id="course" class="form-control" name="course" placeholder="Course" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="regno" class="form-control" name="regno" placeholder="Registration Number" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="username" class="form-control" name="username" placeholder="Username" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="pswd" id="pswd" placeholder="Password" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="cpswd" id="cpswd" placeholder="Confirm Password" required>
+          </div>
+
+          <button type="submit" class="btn btn-success">Register</button>
+          <button type="reset" class="btn btn-danger">Reset</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <p style="height: 20px;"></p>
+  {% endblock %}

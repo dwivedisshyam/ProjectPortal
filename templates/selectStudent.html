@@ -1,0 +1,36 @@
+{% extends './base_layout.html' %}
+
+{% block content %}
+<div class="col-sm-10 m-auto p-3">
+  <center>
+    <h2 class="d-inline">Select Students</h2>
+  </center>
+  <div class="col-sm-12">
+    <h5>{{name}}</h5>
+    <h6>{{dept}}</h6>
+    <hr>
+  </div>
+
+  <div class="col-sm-12">
+    <h3>Interns</h3>
+    <div class="row">
+      {% for student in students %}
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{student.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{student.dept}} - {{student.course}}</h6>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <form action="/home/selectStudent/" method="POST">{% csrf_token %}
+              <input type="hidden" value={{student.id}} name="studentId">
+              <center><input type="submit" class="btn btn-primary" value="Select"></center>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<p style="height: 120px;"></p>
+{% endblock %}

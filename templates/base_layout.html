@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="{% static 'images/icon.png' %}" type="image/png" sizes="16x16">
+  <title>Project Portal</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+  <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+  <div class="navigationMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/home">
+          <img width="50px" height="50px" src="{% static 'images/icon.png' %}" />
+          Project Portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div style="float:right; margin-left:30em;">
+
+          {% if isLoggedin %}
+          <a href="/home/" class="btn btn-info">Home</a>
+          {% if isFaculty %}
+          <a href="selectStudent/" class="btn btn-primary">Select Student</a>
+          {% endif %}
+          <a href="/signout/" class="btn btn-danger">Singout</a>
+          {% endif %}
+        </div>
+        <br style="clear:both">
+      </div>
+    </nav>
+    <br style="clear: both;">
+  </div>
+  <div class="container-fluid">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div class="footer bg-dark text-light text-center">
+    <h6>&copy;NITW</h6>
+  </div>
+
+</body>
+
+</html>

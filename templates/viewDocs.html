@@ -1,0 +1,35 @@
+{% extends './base_layout.html' %}
+
+{% block content %}
+<div class="col-sm-10 m-auto p-3"">
+  <h1 class="d-inline">Student Documents</h1>
+  <div class="col-sm-11">
+    <h3>{{name}}</h3>
+    <h4>{{regno}}</h4>
+    <h4>{{guide}}</h4>
+  </div>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-9">
+        <table class="table">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Uploded At</th>
+            <th scope="col">Description</th>
+          </tr>
+          {% for file in files %}
+          <tr>
+            <td scope="row">{{forloop.counter}}</td>
+            <td><a href="/media/{{file.path}}" target="_blank">{{file.title|title}}</a></td>
+            <td>{{file.date}}</td>
+            <td>{{file.description}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<p style="height: 120px;"></p>
+{% endblock %}
