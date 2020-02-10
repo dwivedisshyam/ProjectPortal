@@ -63,13 +63,16 @@ def home(request):
         response['files'] = File.objects.filter(student = student).order_by('-date')
         return render(request, 'studentHome.html', response)
 
+@login_required(login_url='/')
 def viewDocs(request):
     response = {}
+    response['isLoggedin'] = True
     studentId = request.GET['studentId']
     response['files'] = File.objects.filter(student=studentId).order_by('-date')
 
     return render(request, 'viewDocs.html', response)
 
+@login_required(login_url='/')
 def uploadfile(request):
     file = File()
     file.title = request.POST['title']
@@ -87,9 +90,9 @@ def register(request):
 def registerFaculty(request):
     response = {}
     if request.method == "POST":
-        user = User()
-        user.username = request.POST['username']
-        user.password = request.POST['pswd']
+        user = User.objects.create_user(username=request.POST['username'],password=request.POST['pswd'])
+        # user.username = request.POST['username']
+        # user.password = request.POST['pswd']
         user.email = request.POST['email']
         user.first_name = request.POST['first_name']
         user.last_name = request.POST['last_name']
@@ -98,7 +101,6 @@ def registerFaculty(request):
         faculty.userid = user
         faculty.dept = Department.objects.get(id=request.POST['dept'])
         faculty.save()
-        return render(request, 'index.html', response)
     return redirect('/')
 
 def registerStudent(request):
@@ -117,9 +119,9 @@ def registerStudent(request):
         student.regno = request.POST['regno']
         student.course = request.POST['course']
         student.save()
-        return render(request, 'index.html', response)
     return redirect('/')
 
+@login_required(login_url='/')
 def uploadfile(request):
     file = File()
     student = Student.objects.get(userid=request.user)
@@ -130,8 +132,10 @@ def uploadfile(request):
     file.save()
     return redirect("/home/")
 
+@login_required(login_url='/')
 def selectStudent(request):
     response = {}
+    response['isLoggedin'] = True
     user = request.user
     faculty = Faculty.objects.get(userid=user)
     if request.method=="POST":

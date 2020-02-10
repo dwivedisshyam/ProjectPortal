@@ -12,7 +12,7 @@
   </div>
 
   <div class="col-sm-12">
-    <h3>Interns</h3>
+    <h3></h3>
     <div class="row">
       {% for student in students %}
       <div class="col-sm-3">
@@ -20,7 +20,7 @@
           <div class="card-body">
             <h5 class="card-title">{{student.name}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{student.dept}} - {{student.course}}</h6>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
             <form action="/home/selectStudent/" method="POST">{% csrf_token %}
               <input type="hidden" value={{student.id}} name="studentId">
               <center><input type="submit" class="btn btn-primary" value="Select"></center>
